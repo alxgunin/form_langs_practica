@@ -1,4 +1,3 @@
-#include "slib.h"
 #include "ioputter.h"
 
 int main() {

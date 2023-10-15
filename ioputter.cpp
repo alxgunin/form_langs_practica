@@ -2,9 +2,10 @@
 
 TaskInput input() {
     TaskInput input;
-    std::cin >> input.regexp >> input.x >> input.k;
+    cin >> input.regexp >> input.x >> input.k;
+    return input;
 }
 
 void output(TaskOutput output) {
-    std::cout << output.answer << '\n';
+    cout << output.answer << '\n';
 }
