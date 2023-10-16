@@ -13,7 +13,6 @@ void NFA::ParseAndMakeGraph(string regexp) {
     stack<pair<int32_t, int32_t>> stack;
     int32_t begin1, begin2, end1, end2;
     for (char cur : regexp) {
-        // std::cerr << "char is " << cur << std::endl;
         switch (cur)
         {
         case '+':
@@ -85,34 +84,27 @@ void NFA::ParseAndMakeGraph(string regexp) {
 }
 
 void NFA::RemoveEpsilonsDfs(int32_t vertex, int32_t parent, vector<bool>& used) {
-    // std::cerr << "Launch from " << vertex << " node, parent node " << parent << std::endl;
-    // std::cerr << "if#1..." << std::endl;
     if (is_end[vertex]) {
         is_end[parent] = true;
     }
     if (is_start[vertex]) {
         is_start[parent] = true;
     }
-    // std::cerr << "if#2..." << std::endl;
     if (used[vertex]) return;
     used[vertex] = true;
-    // std::cerr << "Going down..." << std::endl;
     for (size_t i = 0; i < graph[vertex].size(); ++i) {
         auto& [next_vertex, symbol] = graph[vertex][i];
-        // std::cerr << vertex << ' ' << next_vertex << ' ' << symbol << std::endl;
         if (symbol == EPSILON) {
             if (next_vertex != INVALID) {
                 RemoveEpsilonsDfs(next_vertex, vertex, used);
             }
-            next_vertex = INVALID;
+            graph[vertex][i].first = INVALID;
         } else {
             if (parent != vertex) {
                 graph[parent].push_back(pic(next_vertex, symbol));
-                // std::cerr << "pushed " << next_vertex << " to " << parent << std::endl;
             }
         }
     }
-    // std::cerr << "second" << std::endl;
     if (vertex == parent) {
         for (auto& [next_vertex, symbol] : graph[vertex]) {
             if (symbol == EPSILON && next_vertex != INVALID) {
@@ -120,66 +112,28 @@ void NFA::RemoveEpsilonsDfs(int32_t vertex, int32_t parent, vector<bool>& used) 
             }
         }
     }
-    // std::cerr << "The end of DFS" << std::endl;
 }
 
 void NFA::RemoveEpsilons() {
     for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
-        // std::cerr << "iteration " << vertex << std::endl;
         vector<bool> used(vertex_count);
         RemoveEpsilonsDfs(vertex, vertex, used);
-        // std::cerr << "got out from dfs" << std::endl;
     }
-    std::cerr << "REMOVED\n";
     for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
-        // std::cerr << "vertex " << vertex << std::endl;
-        // std::cerr << "connected to ";
         for (auto& [next_vertex, symbol] : graph[vertex]) {
             if (next_vertex != INVALID) {
-                // std::cerr << next_vertex << ' ';
-            }
-        }
-        // std::cerr << '\n';
-    }
-    std::cerr << "passed" << std::endl;
-    vector<vector<pic>> temp;
-    std::cerr << "passed" << std::endl;
-    temp = graph;
-    std::cerr << "passed" << std::endl;
-    graph.clear();
-    std::cerr << "passed" << std::endl;
-    graph.resize(vertex_count);
-    std::cerr << "passed" << std::endl;
-    for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
-        for (auto& [next_vertex, symbol] : temp[vertex]) {
-            if (next_vertex != INVALID) {
-                // std::cerr << "condended graph is " << vertex << " to " << next_vertex << " by " << static_cast<char>(symbol) << std::endl;
-                graph[vertex].push_back(pic(next_vertex, symbol));
             }
         }
     }
-    std::cerr << "start from" << std::endl;
-    for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
-        if (is_start[vertex]) {
-            std::cerr << vertex << ' ';
-        }
-    }
-    std::cerr << std::endl;
-    std::cerr << "end from" << std::endl;
-    for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
-        if (is_end[vertex]) {
-            std::cerr << vertex << ' ';
-        }
-    }
-    std::cerr << std::endl;
-
 }   
 
 void NFA::MakeReversedGraph() {
     graphReversed.resize(vertex_count);
     for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
         for (auto& [next_vertex, symbol] : graph[vertex]) {
-            graphReversed[next_vertex].push_back(pic(vertex, symbol));
+            if (next_vertex != INVALID) {
+                graphReversed[next_vertex].push_back(pic(vertex, symbol));
+            }
         }
     }
 }
@@ -187,9 +141,7 @@ void NFA::MakeReversedGraph() {
 
 NFA::NFA(string regexp) {
     ParseAndMakeGraph(regexp);
-    std::cerr << "parse passed!\n";
     RemoveEpsilons();
-    std::cerr << "remove passed!\n";
     MakeReversedGraph();
 }
 
@@ -248,14 +200,9 @@ int32_t GetMinLength(NFA& nfa, vector<int32_t>& SufIds) {
 }
 
 TaskOutput GetAnswer(TaskInput input) {
-    std::cerr << "started!\n";
     NFA nfa(input.regexp);
-    std::cerr << "made nfa!\n";
     vector<int> SufIds = GetSufIds(nfa, input.k, input.x);
-    std::cerr << "got sufids!\n";
     int32_t result = GetMinLength(nfa, SufIds);
-    std::cerr << "got length!\n";
     result = (result == -1 ? -1 : result + input.k);
-    std::cerr << result << '\n';
     return TaskOutput(result);
 }
