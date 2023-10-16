@@ -130,7 +130,7 @@ void NFA::RemoveEpsilons() {
         RemoveEpsilonsDfs(vertex, vertex, used);
         // std::cerr << "got out from dfs" << std::endl;
     }
-    // std::cerr << "REMOVED\n";
+    std::cerr << "REMOVED\n";
     for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
         // std::cerr << "vertex " << vertex << std::endl;
         // std::cerr << "connected to ";
@@ -141,9 +141,15 @@ void NFA::RemoveEpsilons() {
         }
         // std::cerr << '\n';
     }
-    vector<vector<pic>> temp = graph;
+    std::cerr << "passed" << std::endl;
+    vector<vector<pic>> temp;
+    std::cerr << "passed" << std::endl;
+    temp = graph;
+    std::cerr << "passed" << std::endl;
     graph.clear();
+    std::cerr << "passed" << std::endl;
     graph.resize(vertex_count);
+    std::cerr << "passed" << std::endl;
     for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
         for (auto& [next_vertex, symbol] : temp[vertex]) {
             if (next_vertex != INVALID) {
@@ -152,20 +158,20 @@ void NFA::RemoveEpsilons() {
             }
         }
     }
-    // std::cerr << "start from" << std::endl;
+    std::cerr << "start from" << std::endl;
     for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
         if (is_start[vertex]) {
-            // std::cerr << vertex << ' ';
+            std::cerr << vertex << ' ';
         }
     }
-    // std::cerr << std::endl;
-    // std::cerr << "end from" << std::endl;
+    std::cerr << std::endl;
+    std::cerr << "end from" << std::endl;
     for (int32_t vertex = 0; vertex < vertex_count; ++vertex) {
         if (is_end[vertex]) {
-            // std::cerr << vertex << ' ';
+            std::cerr << vertex << ' ';
         }
     }
-    // std::cerr << std::endl;
+    std::cerr << std::endl;
 
 }   
 
@@ -181,9 +187,9 @@ void NFA::MakeReversedGraph() {
 
 NFA::NFA(string regexp) {
     ParseAndMakeGraph(regexp);
-    // std::cerr << "parse passed!\n";
+    std::cerr << "parse passed!\n";
     RemoveEpsilons();
-    // std::cerr << "remove passed!\n";
+    std::cerr << "remove passed!\n";
     MakeReversedGraph();
 }
 
@@ -244,11 +250,11 @@ int32_t GetMinLength(NFA& nfa, vector<int32_t>& SufIds) {
 TaskOutput GetAnswer(TaskInput input) {
     std::cerr << "started!\n";
     NFA nfa(input.regexp);
-    // std::cerr << "made nfa!\n";
+    std::cerr << "made nfa!\n";
     vector<int> SufIds = GetSufIds(nfa, input.k, input.x);
-    // std::cerr << "got sufids!\n";
+    std::cerr << "got sufids!\n";
     int32_t result = GetMinLength(nfa, SufIds);
-    // std::cerr << "got length!\n";
+    std::cerr << "got length!\n";
     result = (result == -1 ? -1 : result + input.k);
     std::cerr << result << '\n';
     return TaskOutput(result);

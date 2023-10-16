@@ -17,7 +17,6 @@ find_package(Threads REQUIRED)
 include(CodeCoverage)
 include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(${GMOCK_INCLUDE_DIRS})
-
 add_subdirectory(tests)
 enable_testing()
 add_test(TestPart1 {PROJECT_SOURCE_DIR}/bin/all_tests)
