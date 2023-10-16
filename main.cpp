@@ -1,4 +1,4 @@
-#include "ioputter.h"
+#include "ioputter.hpp"
 
 int main() {
     output(GetAnswer(input()));
