@@ -61,6 +61,6 @@ TEST_F(TestBase, IncorrectInput4) {
     TaskInput input;
     input.k = 1;
     input.x = 'b';
-    input.regexp = "abcd+";
+    input.regexp = "abc+";
     ASSERT_ANY_THROW(GetAnswer(input));
 }
