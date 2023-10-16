@@ -24,7 +24,13 @@ iostream
 cassert
 -
 
-/home/alxgunin/form_langs_practica/src/slib.cpp
+/home/alxgunin/form_langs_practica/tests/TestBase.cpp
+TestBase.hpp
+/home/alxgunin/form_langs_practica/tests/TestBase.hpp
 slib.hpp
-/home/alxgunin/form_langs_practica/src/slib.hpp
+/home/alxgunin/form_langs_practica/tests/slib.hpp
+
+/home/alxgunin/form_langs_practica/tests/TestBase.hpp
+gtest/gtest.h
+-
 

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-10-16 16:05:16</td>
+            <td class="headerValue">2023-10-16 17:15:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -212,7 +212,7 @@
 <a name="150"><span class="lineNum">     150 </span>            :       __uniq_ptr_impl(pointer __p, _Del&amp;&amp; __d)</a>
 <a name="151"><span class="lineNum">     151 </span>            :         : _M_t(__p, std::forward&lt;_Del&gt;(__d)) { }</a>
 <a name="152"><span class="lineNum">     152 </span>            : </a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          1 :       pointer&amp;   _M_ptr() { return std::get&lt;0&gt;(_M_t); }</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          4 :       pointer&amp;   _M_ptr() { return std::get&lt;0&gt;(_M_t); }</span></a>
 <a name="154"><span class="lineNum">     154 </span><span class="lineNoCov">          0 :       pointer    _M_ptr() const { return std::get&lt;0&gt;(_M_t); }</span></a>
 <a name="155"><span class="lineNum">     155 </span><span class="lineNoCov">          0 :       _Dp&amp;       _M_deleter() { return std::get&lt;1&gt;(_M_t); }</span></a>
 <a name="156"><span class="lineNum">     156 </span>            :       const _Dp&amp; _M_deleter() const { return std::get&lt;1&gt;(_M_t); }</a>
@@ -345,15 +345,15 @@
 <a name="283"><span class="lineNum">     283 </span>            : #endif</a>
 <a name="284"><span class="lineNum">     284 </span>            : </a>
 <a name="285"><span class="lineNum">     285 </span>            :       /// Destructor, invokes the deleter if the stored pointer is not null.</a>
-<a name="286"><span class="lineNum">     286 </span><span class="lineCov">          1 :       ~unique_ptr() noexcept</span></a>
+<a name="286"><span class="lineNum">     286 </span><span class="lineCov">          4 :       ~unique_ptr() noexcept</span></a>
 <a name="287"><span class="lineNum">     287 </span>            :       {</a>
 <a name="288"><span class="lineNum">     288 </span>            :         static_assert(__is_invocable&lt;deleter_type&amp;, pointer&gt;::value,</a>
 <a name="289"><span class="lineNum">     289 </span>            :                       &quot;unique_ptr's deleter must be invocable with a pointer&quot;);</a>
-<a name="290"><span class="lineNum">     290 </span><span class="lineCov">          1 :         auto&amp; __ptr = _M_t._M_ptr();</span></a>
-<a name="291"><span class="lineNum">     291 </span><span class="lineCov">          1 :         if (__ptr != nullptr)</span></a>
+<a name="290"><span class="lineNum">     290 </span><span class="lineCov">          4 :         auto&amp; __ptr = _M_t._M_ptr();</span></a>
+<a name="291"><span class="lineNum">     291 </span><span class="lineCov">          4 :         if (__ptr != nullptr)</span></a>
 <a name="292"><span class="lineNum">     292 </span><span class="lineNoCov">          0 :           get_deleter()(std::move(__ptr));</span></a>
-<a name="293"><span class="lineNum">     293 </span><span class="lineCov">          1 :         __ptr = pointer();</span></a>
-<a name="294"><span class="lineNum">     294 </span><span class="lineCov">          1 :       }</span></a>
+<a name="293"><span class="lineNum">     293 </span><span class="lineCov">          4 :         __ptr = pointer();</span></a>
+<a name="294"><span class="lineNum">     294 </span><span class="lineCov">          4 :       }</span></a>
 <a name="295"><span class="lineNum">     295 </span>            : </a>
 <a name="296"><span class="lineNum">     296 </span>            :       // Assignment.</a>
 <a name="297"><span class="lineNum">     297 </span>            : </a>
