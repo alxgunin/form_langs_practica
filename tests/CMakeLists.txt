@@ -12,5 +12,12 @@ add_executable(all_tests run_tests.cpp TestBase.cpp ../src/slib.cpp ../src/ioput
 target_include_directories(all_tests PUBLIC ../include)
 target_link_libraries(all_tests ${GTEST_LIBRARIES} Threads::Threads)
 
-setup_target_for_coverage(coverage_report all_tests coverage)
-SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+SET(CMAKE_CXX_FLAGS "-g -O0 --coverage")
+include(${practica_SOURCE_DIR}/cmake/CodeCoverage.cmake)
+append_coverage_compiler_flags()
+setup_target_for_coverage_lcov(
+    NAME test_coverage
+    EXECUTABLE ${practica_SOURCE_DIR}/bin/all_tests
+    DEPENDENCIES all_tests
+    BASE_DIRECTORY ${practica_SOURCE_DIR}
+)

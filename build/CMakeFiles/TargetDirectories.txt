@@ -1,9 +1,0 @@
-/Users/gad/work/mipt/grade2/form_langs_practica/build/CMakeFiles/main.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/CMakeFiles/test.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/CMakeFiles/edit_cache.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/CMakeFiles/rebuild_cache.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/tests/CMakeFiles/all_tests.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/tests/CMakeFiles/coverage_report.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/tests/CMakeFiles/test.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/tests/CMakeFiles/edit_cache.dir
-/Users/gad/work/mipt/grade2/form_langs_practica/build/tests/CMakeFiles/rebuild_cache.dir
