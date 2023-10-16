@@ -14,6 +14,7 @@ target_include_directories(main PUBLIC include/)
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
+include(CodeCoverage)
 include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(${GMOCK_INCLUDE_DIRS})
 
