@@ -61,7 +61,8 @@ def fit():
         raise ValueError('This grammar is not context free')
     
     earley = Earley(grammar)
-    words = lines[p + 5:]
+    cnt_lines = int(lines[p + 4])
+    words = lines[p + 5:p + 5 + cnt_lines]
     for word in words:
         if not(word.islower()):
             raise ValueError(f'Incorrect input string {word}')

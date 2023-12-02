@@ -32,8 +32,10 @@ class Earley:
         self.grammar = grammar
         self.d_helper = dict()
         self.d = dict()
-        self.d_helper[0] = [self.Situation(Rule('?', grammar.start_nonterm), 0, 0)]
-        self.d[0] = {self.Situation(Rule('?', grammar.start_nonterm), 0, 0)}
+        
+    def add_formal_rule(self):
+        self.d_helper[0] = [self.Situation(Rule('?', self.grammar.start_nonterm), 0, 0)]
+        self.d[0] = {self.Situation(Rule('?', self.grammar.start_nonterm), 0, 0)}
         
     def scan(self, j: int, word: str):
         if j == 0:
@@ -116,4 +118,8 @@ class Earley:
     
         
     def inGrammar(self, word: str) -> bool:
+        print(f"\n\nNEW QUERY \"{word}\"\n\n")
+        self.d.clear()
+        self.d_helper.clear()
+        self.add_formal_rule()
         return self.execute(word)
