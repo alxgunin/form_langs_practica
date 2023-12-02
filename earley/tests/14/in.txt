@@ -1,7 +1,7 @@
-2 2 2
-Sa
+1 2 2
+S
 ab
-S-> aSbS
+S-> aSb&S
 S -> 
 S
 2

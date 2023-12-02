@@ -79,7 +79,7 @@ class Earley:
         for index in range(len(self.d_helper[j]) - 1, -1, -1):
             situation = self.d_helper[j][index]
             if situation.predicted:
-                return
+                break
             print(f"predict: [{situation.rule.left} -> {situation.rule.right[:situation.point_position]}*{situation.rule.right[situation.point_position:]}, {situation.i}]")
             self.d_helper[j][index].predicted = True
             if not(situation.passed()) and self.grammar.isNonterm(situation.rule.right[situation.point_position]):
@@ -88,9 +88,11 @@ class Earley:
                 for right_part in self.grammar.rules[situation.rule.right[situation.point_position]]:
                     # print(f"right part is {right_part}")
                     new_situation = self.Situation(Rule(situation.rule.right[situation.point_position], right_part), j, 0)
+                    # print(f"new_situation: [{new_situation.rule.left} -> {new_situation.rule.right[:new_situation.point_position]}*{new_situation.rule.right[new_situation.point_position:]}, {new_situation.i}]")
                     if not(new_situation in self.d[j]):
                         for_adding.add(new_situation)
         
+        # print(len(for_adding))
         for situation in for_adding:
             print(f"predict: adding to D_{j} [{situation.rule.left} -> {situation.rule.right[:situation.point_position]}*{situation.rule.right[situation.point_position:]}, {situation.i}]")
             self.d[j].add(situation)

@@ -1,5 +1,5 @@
 2 2 2
-Sa
+S
 ab
 S-> aSbS
 S -> 
