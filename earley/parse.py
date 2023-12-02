@@ -71,7 +71,7 @@ def fit():
 
 def processQueries():
     (earley, words) = fit()
-    with open('out', 'a') as out:
+    with open('out', 'w+') as out:
         for word in words:
             if earley.inGrammar(word):
                 out.write("Yes\n")
