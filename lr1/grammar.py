@@ -18,10 +18,13 @@ class Grammar:
     def __init__(self, nonterms: set[str], terms: set[str]):
         self.nonterms = nonterms
         self.terms = terms
-        self.rule_helper = list()
         terms.add('$')
+        nonterms.add('?')
         self.rules = dict()
-        self.eps_generators = dict()
+        self.rules['?'] = list()
+        self.rules['?'].append('S')
+        self.rule_helper = [('?', 'S')]
+        self.first = dict()
     
     def add_rule(self, rule: Rule):
         if rule.left not in self.rules.keys():
@@ -48,43 +51,39 @@ class Grammar:
                 return False
         
         return True
-    
-    def isLR1(self) -> bool:
-        
-        return True
-    
-    def get_first(self, nonterm: str) -> set:
-        if nonterm not in self.nonterms:
-            raise ValueError('getting first for non-terminal or undefined symbol')
 
-        if nonterm not in self.first.keys():
-            result = set
+    def get_first(self, symbol: str) -> set:
+        if symbol in self.nonterms:
+            return {symbol}
+
+        if symbol not in self.first.keys():
+            result = set()
             used = dict()
             for char in self.nonterms:
                 used[char] = False
                 
-            char_queue = queue()
-            char_queue.put(nonterm)
+            char_queue = queue.Queue()
+            char_queue.put(symbol)
             while not(char_queue.empty()):
                 cur_char = char_queue.get()
                 used[cur_char] = True
-                for right in self.grammar.rules[cur_char]:
-                    if right[0] not in self.nonterms:
+                for right in self.rules[cur_char]:
+                    if len(right) == 0:
+                        result.add("")
+                        continue
+                    if self.grammar.isTerm(right[0]):
                         result.add(right[0])
                     elif not(used[right[0]]):
                         char_queue.put(right[0])
-            self.first[nonterm] = result
+            self.first[symbol] = result
             
-        return self.first[nonterm]
+        return self.first[symbol]
         
     def eps_generator(self, nonterm: str) -> bool:
         if nonterm not in self.nonterms:
             raise ValueError('Checking eps-generative for undefined nonterm')
         
-        if nonterm not in self.eps_generators.keys():
-            self.eps_generator[nonterm] = "" in self.get_first(nonterm)
-                    
-        return self.eps_generators[nonterm]
+        return ("" in self.get_first(nonterm))
     
     def First(self, alpha: str) -> set:
         if len(alpha) == 0:

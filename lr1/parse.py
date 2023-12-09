@@ -74,6 +74,8 @@ def fit():
         raise ValueError('This grammar is not context free')
     
     lr1 = LR1(grammar)
+    lr1.build_graph()
+    lr1.build_table()
     cnt_lines = int(lines[p + 4])
     words = lines[p + 5:]
     if len(words) != cnt_lines:
@@ -95,5 +97,6 @@ def processQueries():
             else:
                 out.write("No\n")
                 
-if __name__ == "__main__": 
+if __name__ == "__main__":
+    
     processQueries()
