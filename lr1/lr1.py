@@ -177,9 +177,9 @@ class LR1:
         while pos < len(word):
             a = word[pos]   
             q = stack_int[-1]
-            # print(stack_char)
-            # print(stack_int)
-            # print(q, a)
+            # print("stack_char is:", stack_char)
+            # print("stack_int is: ", stack_int)
+            # print("q, a:", q, a)
             if a not in self.table[q].keys():
                 return False
             
@@ -198,7 +198,7 @@ class LR1:
                         return False
                     
                     test = ""
-                    for i in range(len(stack_char) - len(right), len(right)):
+                    for i in range(len(stack_char) - len(right), len(stack_char)):
                         test = test + stack_char[i]
 
                     if test != right:
@@ -220,5 +220,5 @@ class LR1:
                     return False
         
     def inGrammar(self, word: str) -> bool:
-        print(f"\n\nNEW QUERY \"{word}\"\n\n")
+        print(f"\nNEW QUERY \"{word}\"\n")
         return self.process(word)
