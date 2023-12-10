@@ -74,7 +74,11 @@ def fit():
         raise ValueError('This grammar is not context free')
     
     lr1 = LR1(grammar)
-    lr1.build_graph()
+    try:
+        lr1.build_graph()
+    except:
+        write_error()
+        raise
     lr1.build_table()
     cnt_lines = int(lines[p + 4])
     words = lines[p + 5:]
