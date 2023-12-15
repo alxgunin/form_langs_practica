@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/slib.hpp
+algorithm
+-
+stack
+-
+stdexcept
+-
+string
+-
+vector
+-
+queue
+-
+iostream
+-
+cassert
+-
+
+/home/alxgunin/form_langs_practica/tests/TestBase.cpp
+TestBase.hpp
+/home/alxgunin/form_langs_practica/tests/TestBase.hpp
+slib.hpp
+/home/alxgunin/form_langs_practica/tests/slib.hpp
+
+/home/alxgunin/form_langs_practica/tests/TestBase.hpp
+gtest/gtest.h
+-
+

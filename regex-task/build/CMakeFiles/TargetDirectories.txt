@@ -1,0 +1,9 @@
+/home/alxgunin/form_langs_practica/build/CMakeFiles/rebuild_cache.dir
+/home/alxgunin/form_langs_practica/build/CMakeFiles/edit_cache.dir
+/home/alxgunin/form_langs_practica/build/CMakeFiles/test.dir
+/home/alxgunin/form_langs_practica/build/CMakeFiles/main.dir
+/home/alxgunin/form_langs_practica/build/tests/CMakeFiles/rebuild_cache.dir
+/home/alxgunin/form_langs_practica/build/tests/CMakeFiles/edit_cache.dir
+/home/alxgunin/form_langs_practica/build/tests/CMakeFiles/test.dir
+/home/alxgunin/form_langs_practica/build/tests/CMakeFiles/nfa_coverage.dir
+/home/alxgunin/form_langs_practica/build/tests/CMakeFiles/all_tests.dir
